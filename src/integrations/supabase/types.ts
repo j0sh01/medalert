@@ -9,16 +9,259 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      appointments: {
+        Row: {
+          created_at: string | null
+          doctor_id: string
+          duration_minutes: number | null
+          id: string
+          notes: string | null
+          patient_id: string
+          scheduled_at: string
+          status: Database["public"]["Enums"]["appointment_status"] | null
+          symptoms: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          doctor_id: string
+          duration_minutes?: number | null
+          id?: string
+          notes?: string | null
+          patient_id: string
+          scheduled_at: string
+          status?: Database["public"]["Enums"]["appointment_status"] | null
+          symptoms?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          doctor_id?: string
+          duration_minutes?: number | null
+          id?: string
+          notes?: string | null
+          patient_id?: string
+          scheduled_at?: string
+          status?: Database["public"]["Enums"]["appointment_status"] | null
+          symptoms?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointments_doctor_id_fkey"
+            columns: ["doctor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      emergency_requests: {
+        Row: {
+          address: string | null
+          created_at: string | null
+          description: string | null
+          estimated_arrival: string | null
+          id: string
+          latitude: number | null
+          longitude: number | null
+          patient_id: string
+          responder_id: string | null
+          status: Database["public"]["Enums"]["emergency_status"] | null
+          updated_at: string | null
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string | null
+          description?: string | null
+          estimated_arrival?: string | null
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          patient_id: string
+          responder_id?: string | null
+          status?: Database["public"]["Enums"]["emergency_status"] | null
+          updated_at?: string | null
+        }
+        Update: {
+          address?: string | null
+          created_at?: string | null
+          description?: string | null
+          estimated_arrival?: string | null
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          patient_id?: string
+          responder_id?: string | null
+          status?: Database["public"]["Enums"]["emergency_status"] | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "emergency_requests_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "emergency_requests_responder_id_fkey"
+            columns: ["responder_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_read: boolean | null
+          message: string
+          title: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          message: string
+          title: string
+          type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          message?: string
+          title?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string | null
+          email: string
+          first_name: string | null
+          hospital_affiliation: string | null
+          id: string
+          is_verified: boolean | null
+          last_name: string | null
+          license_number: string | null
+          phone: string | null
+          role: Database["public"]["Enums"]["user_role"]
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          first_name?: string | null
+          hospital_affiliation?: string | null
+          id: string
+          is_verified?: boolean | null
+          last_name?: string | null
+          license_number?: string | null
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          first_name?: string | null
+          hospital_affiliation?: string | null
+          id?: string
+          is_verified?: boolean | null
+          last_name?: string | null
+          license_number?: string | null
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      symptom_checks: {
+        Row: {
+          ai_response: string | null
+          created_at: string | null
+          id: string
+          recommended_action: string | null
+          severity_level: number | null
+          symptoms: string[]
+          user_id: string
+        }
+        Insert: {
+          ai_response?: string | null
+          created_at?: string | null
+          id?: string
+          recommended_action?: string | null
+          severity_level?: number | null
+          symptoms: string[]
+          user_id: string
+        }
+        Update: {
+          ai_response?: string | null
+          created_at?: string | null
+          id?: string
+          recommended_action?: string | null
+          severity_level?: number | null
+          symptoms?: string[]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "symptom_checks_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_user_role: {
+        Args: { user_id: string }
+        Returns: Database["public"]["Enums"]["user_role"]
+      }
     }
     Enums: {
-      [_ in never]: never
+      appointment_status:
+        | "scheduled"
+        | "in_progress"
+        | "completed"
+        | "cancelled"
+      emergency_status:
+        | "pending"
+        | "accepted"
+        | "en_route"
+        | "arrived"
+        | "completed"
+        | "cancelled"
+      user_role: "patient" | "doctor" | "emergency_responder" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -133,6 +376,22 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      appointment_status: [
+        "scheduled",
+        "in_progress",
+        "completed",
+        "cancelled",
+      ],
+      emergency_status: [
+        "pending",
+        "accepted",
+        "en_route",
+        "arrived",
+        "completed",
+        "cancelled",
+      ],
+      user_role: ["patient", "doctor", "emergency_responder", "admin"],
+    },
   },
 } as const

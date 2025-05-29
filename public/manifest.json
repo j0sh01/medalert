@@ -1,0 +1,34 @@
+
+{
+  "name": "MedAlert - Emergency Healthcare",
+  "short_name": "MedAlert",
+  "description": "Real-time emergency healthcare and telemedicine services for Africa",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#007BFF",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/lovable-uploads/medAlert-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/lovable-uploads/medAlert-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/lovable-uploads/medAlert-screenshot-1.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "categories": ["health", "medical", "emergency"],
+  "lang": "en"
+}

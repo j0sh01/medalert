@@ -169,7 +169,7 @@ export type Database = {
           last_name: string | null
           license_number: string | null
           phone: string | null
-          role: Database["public"]["Enums"]["user_role"]
+          role: string
           updated_at: string | null
         }
         Insert: {
@@ -182,7 +182,7 @@ export type Database = {
           last_name?: string | null
           license_number?: string | null
           phone?: string | null
-          role?: Database["public"]["Enums"]["user_role"]
+          role?: string
           updated_at?: string | null
         }
         Update: {
@@ -195,7 +195,7 @@ export type Database = {
           last_name?: string | null
           license_number?: string | null
           phone?: string | null
-          role?: Database["public"]["Enums"]["user_role"]
+          role?: string
           updated_at?: string | null
         }
         Relationships: []
@@ -237,6 +237,33 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      verification_requests: {
+        Row: {
+          created_at: string
+          document_urls: string[]
+          id: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          document_urls?: string[]
+          id?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          document_urls?: string[]
+          id?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
     }
     Views: {

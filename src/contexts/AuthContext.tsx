@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
@@ -9,7 +8,7 @@ interface Profile {
   first_name?: string;
   last_name?: string;
   phone?: string;
-  role: 'patient' | 'doctor' | 'emergency_responder' | 'admin';
+  role: string; // Changed from union type to string to match database
   license_number?: string;
   hospital_affiliation?: string;
   is_verified: boolean;
